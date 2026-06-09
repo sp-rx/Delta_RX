@@ -58,8 +58,6 @@ img{
   max-width:92%;
   margin:40px auto 0;
   border-radius:14px;
-  opacity:0;
-  animation:fadeUp 2.0s ease forwards;
 }
 
 /* TRUST */
@@ -82,7 +80,6 @@ img{
   text-decoration:none;
   opacity:0;
   animation:fadeUp 2.3s ease forwards;
-  transition:0.25s;
 }
 .btn:hover{
   transform:translateY(-2px);
@@ -187,6 +184,21 @@ img{
   display:inline-block;
 }
 
+.thumb {
+  width:60px;
+  height:40px;
+  object-fit:cover;
+  border-radius:6px;
+  opacity:0.5;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+
+.thumb.active {
+  opacity:1;
+  border:2px solid #0b3d2e;
+}
+
 </style>
 </head>
 
@@ -217,28 +229,130 @@ img{
 <div style="height:40px"></div>
 
 <div class="infopane">
-<h2> When you see your best, every moment is a wonder. </h2>
-<a href="https://wa.me/601170199170" class="btn">Contact Us To Know More!</a>
 
-<div style="height:20px"></div>
+  <div style="max-width:900px;margin:auto;">
 
-
-
-  </div>
+    <img
+      id="slideImg"
+      src="https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/1.jpg"
+      style="width:100%;max-width:900px;border-radius:12px;"
+    >
+<div id="thumbStrip" style="
+  margin-top:15px;
+  display:flex;
+  justify-content:center;
+  gap:6px;
+">
 </div>
 
-<div style="height:20px"></div>
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+
+      <button class="btn" onclick="prevSlide()">◀ Previous</button>
+
+      <button class="btn" onclick="nextSlide()">Next ▶</button>
+
+    </div>
+
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+
+      <button class="btn" onclick="jumpTo(20)">Slide 20</button>
+
+      <button class="btn" onclick="jumpTo(25)">Slide 25</button>
+
+      <button class="btn" onclick="jumpTo(41)">Slide 41</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+let currentSlide = 1;
+const maxSlide = 41;
+const imageCache = [];
+
+// preload all images
+function preloadImages(){
+  for(let i = 1; i <= maxSlide; i++){
+    const img = new Image();
+    img.src = `https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/${i}.jpg`;
+    imageCache[i] = img;
+  }
+}
+
+function updateSlide(){
+  const cached = imageCache[currentSlide];
+
+  document.getElementById("slideImg").src =
+    cached && cached.complete
+      ? cached.src
+      : `https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/${currentSlide}.jpg`;
+
+  renderThumbWindow();
+}
+
+function prevSlide(){
+  if(currentSlide > 1){
+    currentSlide--;
+    updateSlide();
+  }
+}
+
+function nextSlide(){
+  if(currentSlide < maxSlide){
+    currentSlide++;
+    updateSlide();
+  }
+}
+
+function jumpTo(n){
+  currentSlide = n;
+  updateSlide();
+}
+
+function buildThumbnails(){
+  renderThumbWindow();
+}
+
+function renderThumbWindow(){
+  const strip = document.getElementById("thumbStrip");
+  strip.innerHTML = "";
+
+  const start = Math.max(1, currentSlide - 3);
+  const end = Math.min(maxSlide, currentSlide + 3);
+
+  for(let i = start; i <= end; i++){
+    const img = document.createElement("img");
+
+    img.src = `https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/${i}.jpg`;
+    img.className = "thumb";
+
+    if(i === currentSlide){
+      img.classList.add("active");
+    }
+
+    img.onclick = () => {
+      currentSlide = i;
+      updateSlide();
+      renderThumbWindow();
+    };
+
+    strip.appendChild(img);
+  }
+}
 
 
 
-  <div class="designerMix">
-    <div><span class="big25">No more confusing questions! </span> — like “which is clearer, 1 or 2?”</div>
 
-    <div><span class="big25">Prescriptions are factual numbers. </span> — not opinion nor guessing.</div></div><img src="fan-chart-clean-compare.jpg" alt="Accuracy Comparison">
+window.addEventListener("load", () => {
+  preloadImages();
+  buildThumbnails();
+});
 
-<div class="trust">Used in-house and by optometry staff for training.</div>
 
-<a href="https://wa.me/601170199170" class="btn">Book Eye Check</a>
+
+</script>
 
 
 
