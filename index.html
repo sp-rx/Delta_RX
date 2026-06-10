@@ -3,358 +3,576 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eye Exam Reinvented — Kiara</title>
+<title>Eye Exam Reinvented — Kiara Optometry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --green:#0b3d2e;
-  --offwhite:#fdfcf7;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #0b3d2e;
+  --green-mid: #1a6b50;
+  --green-light: #d6ede4;
+  --cream: #fdfcf7;
+  --cream-dark: #f4f1e8;
+  --text: #0b3d2e;
+  --text-muted: #4a6b5c;
+  --text-faint: #8aab9a;
+  --border: rgba(11,61,46,0.12);
 }
 
-/* GLOBAL */
-body{
-  margin:0;
-  padding:0;
-  background:var(--offwhite);
-  color:var(--green);
-  font-family:"Inter",system-ui,-apple-system,sans-serif;
-  text-align:center;
-  overflow-x:hidden;
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* LOGO */
-.logo{
-  font-size:13px;
-  letter-spacing:6px;
-  margin-top:30px;
-  font-weight:500;
-  opacity:.85;
-  animation:fadeUp 1.2s ease forwards;
-  line-height:1.5;
+/* ── HEADER ── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--border);
+  background: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-/* TYPOGRAPHY */
-h1{
-  font-size:40px;
-  font-weight:500;
-  letter-spacing:-0.3px;
-  line-height:1.18;
-  margin:80px 0 20px;
-  opacity:0;
-  transform:translateY(28px);
-  animation:fadeUp 1.4s ease forwards;
+.nav-logo {
+  font-size: 12px;
+  letter-spacing: 4px;
+  font-weight: 600;
+  color: var(--green);
+  line-height: 1.5;
 }
 
-p{
-  font-size:18px;
-  line-height:1.55;
-  max-width:540px;
-  opacity:0;
-  animation:fadeUp 1.8s ease forwards;
+.nav-logo span {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--text-muted);
 }
 
-/* IMAGE */
-img{
-  max-width:92%;
-  margin:40px auto 0;
-  border-radius:14px;
+.nav-cta {
+  background: var(--green);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 40px 60px;
+  text-align: center;
 }
 
-/* TRUST */
-.trust{
-  font-size:14px;
-  opacity:.5;
-  margin-top:28px;
-  animation:fadeUp 2.2s ease forwards;
+.hero-eyebrow {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green-mid);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  padding: 6px 16px;
+  border-radius: 40px;
+  margin-bottom: 28px;
+  text-transform: uppercase;
 }
 
-/* CTA */
-.btn{
-  display:inline-block;
-  margin-top:36px;
-  background:var(--green);
-  color:white;
-  padding:15px 40px;
-  font-size:17px;
-  border-radius:12px;
-  text-decoration:none;
-  opacity:0;
-  animation:fadeUp 2.3s ease forwards;
-}
-.btn:hover{
-  transform:translateY(-2px);
+h1 {
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 12px;
 }
 
-/* WHATSAPP */
-#waFloat{
-  position:fixed;
-  right:18px;
-  bottom:24px;
-  background:#25D366;
-  color:white;
-  padding:12px 20px;
-  border-radius:40px;
-  font-size:15px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.18);
-  text-decoration:none;
-  z-index:999;
-}
-#waFloat img{
-  width:22px;
-  height:22px;
+.rotating-line {
+  display: block;
+  height: 62px;
+  overflow: hidden;
+  position: relative;
+  color: var(--green-mid);
+  font-style: italic;
 }
 
-/* ANIMATION */
-@keyframes fadeUp{
-  0%{ opacity:0; transform:translateY(28px); }
-  100%{ opacity:1; transform:translateY(0); }
+.rotating-line span {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: rotWords 12s infinite;
+}
+.rotating-line span:nth-child(1) { animation-delay: 0s; }
+.rotating-line span:nth-child(2) { animation-delay: 3s; }
+.rotating-line span:nth-child(3) { animation-delay: 6s; }
+.rotating-line span:nth-child(4) { animation-delay: 9s; }
+
+@keyframes rotWords {
+  0%   { opacity: 0; transform: translateY(20px); }
+  8%   { opacity: 1; transform: translateY(0); }
+  28%  { opacity: 1; transform: translateY(0); }
+  36%  { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 0; }
 }
 
-/* ROTATING BANNER */
-.rotateBanner{
-  font-size:40px;
-  margin-top:5px;
-  font-weight:500;
-  height:50px;
-  overflow:hidden;
-  color:#0b3d2e;
-  position:relative;
+.hero-sub {
+  font-size: 18px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 28px auto 0;
 }
 
-.rotateBanner span{
-  position:absolute;
-  width:100%;
-  left:0;
-  top:0;
-  opacity:0;
-  transform:translateY(20px);
-  animation:rotateWords 10s infinite;
-}
-.rotateBanner span:nth-child(1){ animation-delay:0s; }
-.rotateBanner span:nth-child(2){ animation-delay:2.5s; }
-.rotateBanner span:nth-child(3){ animation-delay:5s; }
-.rotateBanner span:nth-child(4){ animation-delay:7.5s; }
-
-
-@keyframes rotateWords{
-  0%{opacity:0; transform:translateY(20px);}
-  10%{opacity:1; transform:translateY(0);}
-  25%{opacity:1; transform:translateY(0);}
-  35%{opacity:0; transform:translateY(-20px);}
-  100%{opacity:0;}
+/* ── PILLS ROW ── */
+.pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 36px 40px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-/* INFO PANE */
-.infopane{
-  width:100%;
-  background:#f3f0e9;
-  animation:fadePane 2s ease forwards;
-  opacity:0;
-  text-align:center;  
-  padding:30px 0px 30px 0px; 
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  background: white;
+  font-size: 14px;
+  color: var(--text);
 }
 
-
-@keyframes fadePane{
-  0%{opacity:0; transform:translateY(20px);}
-  100%{opacity:1; transform:translateY(0);}
+.pill-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-/* TEXT BLOCKS */
-.designerMix{
-  font-size:15px;
-  max-width:600px;
-  color:#0b3d2e;
-  text-align:center;
-  font-weight:400;
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-  margin:0 auto;     
+.pill-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--green-mid);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-
-.big25{
-  font-size:20px;
-  font-weight:600;
-  letter-spacing:-0.3px;
-  display:inline-block;
+/* ── GALLERIES ── */
+.galleries {
+  background: var(--cream-dark);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 60px 40px;
 }
+
+.galleries-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.gallery-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.gallery-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gallery-title {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.gallery-counter {
+  font-size: 13px;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.gallery-img-wrap {
+  background: var(--cream-dark);
+  aspect-ratio: 10 / 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gallery-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.thumb-strip {
+  display: flex;
+  gap: 6px;
+  padding: 14px 24px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+  scrollbar-width: none;
+}
+.thumb-strip::-webkit-scrollbar { display: none; }
 
 .thumb {
-  width:60px;
-  height:40px;
-  object-fit:cover;
-  border-radius:6px;
-  opacity:0.5;
-  cursor:pointer;
-  border:2px solid transparent;
+  flex-shrink: 0;
+  width: 56px;
+  height: 38px;
+  border-radius: 6px;
+  object-fit: cover;
+  opacity: 0.4;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: opacity 0.15s, border-color 0.15s;
+}
+.thumb:hover { opacity: 0.7; }
+.thumb.active { opacity: 1; border-color: var(--green); }
+
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
 }
 
-.thumb.active {
-  opacity:1;
-  border:2px solid #0b3d2e;
+.gal-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  font-family: inherit;
+}
+.gal-btn:hover { background: var(--cream-dark); border-color: var(--green); }
+.gal-btn:disabled { opacity: 0.3; cursor: default; }
+
+.gal-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 72px 40px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-section h2 {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--green);
+  color: white;
+  padding: 15px 36px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.15s;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: white;
+  padding: 13px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.btn-whatsapp:hover { opacity: 0.9; }
+
+.trust-note {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-faint);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 40px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-faint);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  header { padding: 16px 20px; }
+  .hero { padding: 48px 20px 40px; }
+  h1 { font-size: 34px; letter-spacing: -0.8px; }
+  .rotating-line { height: 44px; }
+  .pills { padding: 24px 20px; }
+  .galleries { padding: 40px 20px; }
+  .gallery-controls { padding: 12px 16px; }
+  .gallery-header { padding: 14px 16px; }
+  .thumb-strip { padding: 12px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-line span { animation: none; opacity: 1; position: static; }
+  .rotating-line span:not(:first-child) { display: none; }
+}
 </style>
 </head>
 
 <body>
 
-<div class="logo">
-  KIARA OPTOMETRY<br>at Mont Kiara
-</div>
-
-<h1>
-  The eye exam is reinvented.<br>
-  <div class="rotateBanner">
-    <span>It is accurate.</span>
-    <span>It is science-based.</span>
-    <span>It is repeatable.</span>
-    <span>It is the clearest possible.</span>
-
+<header>
+  <div class="nav-logo">
+    KIARA OPTOMETRY
+    <span>at Mont Kiara</span>
   </div>
-</h1>
-<div style="height:20px"></div>
+  <a href="#book" class="nav-cta">Book an exam</a>
+</header>
 
+<section class="hero">
+  <span class="hero-eyebrow">Vision care reimagined</span>
+  <h1>
+    The eye exam,<br>reinvented.
+    <span class="rotating-line">
+      <span>Accurate.</span>
+      <span>Science-based.</span>
+      <span>Repeatable.</span>
+      <span>Crystal clear.</span>
+    </span>
+  </h1>
+  <p class="hero-sub">
+    No more guessing. No more "which is clearer, 1 or 2?" 
+    Your prescription is a factual number — not an opinion.
+  </p>
+</section>
 
-  <div class="designerMix">
-    <div><span class="big25">No more confusing questions! </span> — like “which is clearer, 1 or 2?”</div>
-
-    <div><span class="big25">Prescriptions are factual numbers. </span> — not opinion nor guessing.</div></div>
-    
-<div style="height:40px"></div>
-
-<div class="infopane">
-
-  <div style="max-width:900px;margin:auto;">
-
-    <img
-      id="slideImg"
-      src="https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/1.jpg"
-      style="width:100%;max-width:900px;border-radius:12px;"
-    >
-<div id="thumbStrip" style="
-  margin-top:15px;
-  display:flex;
-  justify-content:center;
-  gap:6px;
-">
+<div class="pills">
+  <div class="pill">
+    <div class="pill-icon">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </div>
+    No more "1 or 2?" guessing
+  </div>
+  <div class="pill">
+    <div class="pill-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    Prescriptions are factual numbers
+  </div>
+  <div class="pill">
+    <div class="pill-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+    </div>
+    Fully repeatable results
+  </div>
 </div>
 
-    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+<!-- GALLERIES -->
+<section class="galleries">
+  <div class="galleries-inner">
 
-      <button class="btn" onclick="prevSlide()">◀ Previous</button>
-
-      <button class="btn" onclick="nextSlide()">Next ▶</button>
-
+    <div class="gallery-card">
+      <div class="gallery-header">
+        <span class="gallery-title">Gallery one</span>
+        <span class="gallery-counter" id="g1counter">1 / 22</span>
+      </div>
+      <div class="gallery-img-wrap">
+        <img id="slideImg1" src="https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/1.jpg" alt="Slide 1">
+      </div>
+      <div class="thumb-strip" id="thumbStrip1"></div>
+      <div class="gallery-controls">
+        <button class="gal-btn" id="g1prev" onclick="g1.prev()">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          Previous
+        </button>
+        <button class="gal-btn" id="g1next" onclick="g1.next()">
+          Next
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
     </div>
 
-    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-
-      <button class="btn" onclick="jumpTo(20)">Slide 20</button>
-
-      <button class="btn" onclick="jumpTo(25)">Slide 25</button>
-
-      <button class="btn" onclick="jumpTo(41)">Slide 41</button>
-
+    <div class="gallery-card">
+      <div class="gallery-header">
+        <span class="gallery-title">Gallery two</span>
+        <span class="gallery-counter" id="g2counter">1 / 22</span>
+      </div>
+      <div class="gallery-img-wrap">
+        <img id="slideImg2" src="https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/22.jpg" alt="Slide 1">
+      </div>
+      <div class="thumb-strip" id="thumbStrip2"></div>
+      <div class="gallery-controls">
+        <button class="gal-btn" id="g2prev" onclick="g2.prev()">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          Previous
+        </button>
+        <button class="gal-btn" id="g2next" onclick="g2.next()">
+          Next
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
     </div>
 
   </div>
+</section>
 
-</div>
+<!-- CTA -->
+<section class="cta-section" id="book">
+  <h2>Ready to see clearly?</h2>
+  <p>Book your science-based eye exam at our Mont Kiara clinic. Walk in with questions, walk out with answers.</p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Book an appointment
+    </a>
+    <a href="https://wa.me/" class="btn-whatsapp">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.852L0 24l6.335-1.61A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.032-1.388l-.36-.214-3.742.951.997-3.648-.235-.374A9.789 9.789 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.431-4.388 9.818-9.818 9.818z"/></svg>
+      Chat on WhatsApp
+    </a>
+  </div>
+  <p class="trust-note">Serving patients across Kuala Lumpur · Mont Kiara</p>
+</section>
+
+<footer>
+  © 2025 Kiara Optometry · Mont Kiara, Kuala Lumpur
+</footer>
 
 <script>
-let currentSlide = 1;
-const maxSlide = 41;
-const imageCache = [];
+function makeGallery({ imageId, thumbsId, counterId, prevId, nextId, baseUrl, slides }) {
+  let idx = 0;
+  const img = document.getElementById(imageId);
+  const thumbs = document.getElementById(thumbsId);
+  const counter = document.getElementById(counterId);
+  const prevBtn = document.getElementById(prevId);
+  const nextBtn = document.getElementById(nextId);
 
-// preload all images
-function preloadImages(){
-  for(let i = 1; i <= maxSlide; i++){
-    const img = new Image();
-    img.src = `https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/${i}.jpg`;
-    imageCache[i] = img;
+  function show(i) {
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    img.src = baseUrl + slides[idx] + '.jpg';
+    counter.textContent = (idx + 1) + ' / ' + slides.length;
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === slides.length - 1;
+    renderThumbs();
   }
-}
 
-function updateSlide(){
-  const cached = imageCache[currentSlide];
-
-  document.getElementById("slideImg").src =
-    cached && cached.complete
-      ? cached.src
-      : `https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/${currentSlide}.jpg`;
-
-  renderThumbWindow();
-}
-
-function prevSlide(){
-  if(currentSlide > 1){
-    currentSlide--;
-    updateSlide();
-  }
-}
-
-function nextSlide(){
-  if(currentSlide < maxSlide){
-    currentSlide++;
-    updateSlide();
-  }
-}
-
-function jumpTo(n){
-  currentSlide = n;
-  updateSlide();
-}
-
-function buildThumbnails(){
-  renderThumbWindow();
-}
-
-function renderThumbWindow(){
-  const strip = document.getElementById("thumbStrip");
-  strip.innerHTML = "";
-
-  const start = Math.max(1, currentSlide - 3);
-  const end = Math.min(maxSlide, currentSlide + 3);
-
-  for(let i = start; i <= end; i++){
-    const img = document.createElement("img");
-
-    img.src = `https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/${i}.jpg`;
-    img.className = "thumb";
-
-    if(i === currentSlide){
-      img.classList.add("active");
+  function renderThumbs() {
+    thumbs.innerHTML = '';
+    const start = Math.max(0, idx - 3);
+    const end = Math.min(slides.length - 1, idx + 3);
+    for (let i = start; i <= end; i++) {
+      const t = document.createElement('img');
+      t.src = baseUrl + slides[i] + '.jpg';
+      t.className = 'thumb' + (i === idx ? ' active' : '');
+      t.alt = 'Slide ' + (i + 1);
+      t.onclick = () => show(i);
+      thumbs.appendChild(t);
     }
-
-    img.onclick = () => {
-      currentSlide = i;
-      updateSlide();
-      renderThumbWindow();
-    };
-
-    strip.appendChild(img);
   }
+
+  slides.forEach(s => { const p = new Image(); p.src = baseUrl + s + '.jpg'; });
+  show(0);
+
+  return { next() { show(idx + 1); }, prev() { show(idx - 1); } };
 }
 
+const BASE = 'https://raw.githubusercontent.com/sp-rx/Delta_RX/refs/heads/main/Delta_RX/';
 
-
-
-window.addEventListener("load", () => {
-  preloadImages();
-  buildThumbnails();
+const g1 = makeGallery({
+  imageId: 'slideImg1', thumbsId: 'thumbStrip1',
+  counterId: 'g1counter', prevId: 'g1prev', nextId: 'g1next',
+  baseUrl: BASE,
+  slides: [...Array.from({length: 21}, (_, i) => i + 1), 43]
 });
 
-
-
+const g2 = makeGallery({
+  imageId: 'slideImg2', thumbsId: 'thumbStrip2',
+  counterId: 'g2counter', prevId: 'g2prev', nextId: 'g2next',
+  baseUrl: BASE,
+  slides: Array.from({length: 22}, (_, i) => i + 22)
+});
 </script>
-
-
 
 </body>
 </html>
